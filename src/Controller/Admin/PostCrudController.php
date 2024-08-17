@@ -45,7 +45,6 @@ class PostCrudController extends AbstractCrudController
 
             AssociationField::new('user')->setColumns('col-md-6'),
 
-
             AssociationField::new('postHasIngredient')->setColumns('col-md-6'),
 
     
@@ -71,7 +70,6 @@ class PostCrudController extends AbstractCrudController
         return $filters
             ->add('user')
             ->add('title')
-
             ->add('rubrik')
             //->add('CreatedAt')
     ;

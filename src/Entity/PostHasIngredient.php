@@ -44,6 +44,11 @@ class PostHasIngredient
         return $this;
     }
 
+    public function __toString()
+    {
+        return $this->quantity; 
+    }
+
     public function getIngredient(): ?Ingredient
     {
         return $this->ingredient;

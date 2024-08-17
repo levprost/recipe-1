@@ -7,6 +7,7 @@ use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\DBAL\Types\Types;
 use Doctrine\ORM\Mapping as ORM;
+use Gedmo\Mapping\Annotation as Gedmo;
 
 #[ORM\Entity(repositoryClass: PostRepository::class)]
 class Post
@@ -70,6 +71,13 @@ class Post
     #[ORM\ManyToOne(inversedBy: 'posts')]
     #[ORM\JoinColumn(nullable: false)]
     private ?Rubrik $rubrik = null;
+
+    #[Gedmo\Slug(fields:['title'])]
+    #[ORM\Column(length: 128, unique:true)]
+    private ?string $slug = null;
+
+    #[ORM\Column]
+    private ?bool $isPublished = null;
 
     public function __construct()
     {
@@ -314,6 +322,30 @@ class Post
     public function setRubrik(?Rubrik $rubrik): static
     {
         $this->rubrik = $rubrik;
+
+        return $this;
+    }
+
+    public function getSlug(): ?string
+    {
+        return $this->slug;
+    }
+
+    /*public function setSlug(string $slug): static
+    {
+        $this->slug = $slug;
+
+        return $this;
+    }*/
+
+    public function isPublished(): ?bool
+    {
+        return $this->isPublished;
+    }
+
+    public function setPublished(bool $isPublished): static
+    {
+        $this->isPublished = $isPublished;
 
         return $this;
     }

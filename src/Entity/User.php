@@ -62,6 +62,9 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     #[ORM\ManyToMany(targetEntity: Post::class, mappedBy: 'favoris')]
     private Collection $favoris;
 
+    #[ORM\Column(length: 10, nullable: true)]
+    private ?string $opption = null;
+
     public function __construct()
     {
         $this->favoris = new ArrayCollection();
@@ -249,6 +252,18 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
         if ($this->favoris->removeElement($favori)) {
             $favori->removeFavori($this);
         }
+
+        return $this;
+    }
+
+    public function getOpption(): ?string
+    {
+        return $this->opption;
+    }
+
+    public function setOpption(?string $opption): static
+    {
+        $this->opption = $opption;
 
         return $this;
     }

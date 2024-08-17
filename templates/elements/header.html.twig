@@ -1,117 +1,133 @@
-<!DOCTYPE html>
-<html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet" />
-    <style></style>
-  </head>
-  <body>
-<nav class="navbar navbar-expand-lg navbar-light bg-danger">
-  <div class="container-fluid">
-    <a class="navbar-brand" href="{{ path('app_post') }}" style="color:white;">Avance</a>
-    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
-      <span class="navbar-toggler-icon"></span>
-    </button>
-    <div class="collapse navbar-collapse" id="navbarSupportedContent">
-      <ul class="navbar-nav me-auto mb-2 mb-lg-0">
-        <li class="nav-item">
-          <a class="nav-link active" aria-current="page" href="{{ path('app_post') }}" style="color:white;"><i class="fa fa-home" aria-hidden="true"></i></a>
-        </li>
-        <li class="nav-item">
-          <a class="nav-link" href="#" style="color:white;">Link</a>
-        </li>
-        <li class="nav-item dropdown">
-          <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false" style="color:white;">
-            Dropdown
-          </a>
-          <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
-            <li><a class="dropdown-item" href="#">Action</a></li>
-            <li><a class="dropdown-item" href="#">Another action</a></li>
-            <li><hr class="dropdown-divider"></li>
-            <li><a class="dropdown-item" href="#">Something else here</a></li>
-          </ul>
-        </li>
-          <li class="nav-item dropdown">
-          <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false" style="color:white;">
-            Rubrik
-          </a>
-          <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
-            <li><hr class="dropdown-divider"></li>
-            <li><a class="dropdown-item" href="#">Something else here</a></li>
-          </ul>
-        </li>
-          <li class="nav-item dropdown">
-          <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false" style="color:white;">
-            Dropdown
-          </a>
-          <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
-            <li><a class="dropdown-item" href="#">Action</a></li>
-            <li><a class="dropdown-item" href="#">Another action</a></li>
-            <li><hr class="dropdown-divider"></li>
-            <li><a class="dropdown-item" href="#">Something else here</a></li>
-          </ul>
-        </li>
-      </ul>
 
-        {# <div class="header-social-links d-flex">
-            {% if app.user %}
-              <a class="col-md-12 dropbtn" href="{{path('app_logout')}}">
-                  {% if app.user.avatar is empty %}
-                    <i class="fa-solid fa-circle-user"></i>
-                  {% elseif app.user.option is same as ('yes')%}
-                    <img class="imgRounded rounded" src="{{asser('divers/avatars/' ~ app.user.avatar)}}" style="width:25px; height:25px;">&ensp;
-                    <span class="firtstname">{{app.user.firstname|capitalize }}</span><span class="lastname">{{app.user.lastname|capitalize }}</span>
-                    <a class="" href="{{path('app_logout')}}">
-                      <i class="fa fa-power-off loggouts"></i>
+<div class="container-fluid">
+  <div class="container">
+    <div class="row">
+      
+      <div class="col-md-2"></div>
+
+      <div class="col-md-7">
+        <nav class="navbar navbar-expand-lg">
+          <div class="container-fluid">
+            <a class="navbar-brand" href="{{ path('app_post') }}">RECIPE</a> <!--Si je clique sur MOGO => retour à la page d'accueil-->
+            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+              <span class="navbar-toggler-icon"></span>
+            </button>
+
+            <div class="collapse navbar-collapse" id="navbarNav">
+              <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+
+                <li class="nav-item">
+                  <a class="nav-link active" aria-current="page" href="{{ path('app_post') }}">
+                    <i class="fa-solid fa-house"></i>
+                  </a>
+                </li>
+
+                <li class="nav-item">
+                  <a class="nav-link" href="#">A propos</a>
+                </li>
+
+    
+
+                <!--DROPDOWN 1-->
+                <li class="nav-item dropdown">
+                  <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                    House
+                  </a>
+                  <ul class="dropdown-menu">
+                    <li><a class="dropdown-item" href="">Cuisine</a></li>
+                    <li><a class="dropdown-item" href="">Salle de bains</a></li>
+                    {# 'path' est une fonction du moteur de template, qui génère une URL basée sur une route nommée
+
+                    'posts_by_rubrik' est le nom de la route définie dans la configuration des routes de l'application
+                    => dans Symfony, les routes sont généralement définies dans un fichier YAML,XML, ou via des annotations
+                    
+                    '{id: 3}' est un objet qui contient les paramètres nécessaires pour générer l'URL
+                    Ici, il fournit la valeur de l'identifiant 'id' pour la route nommée 'rubrik'#}
+
+                    <li><hr class="dropdown-divider"></li>
+                    <li><a class="dropdown-item" href="#">Maison</a></li>
+                  </ul>
+                </li>
+
+                <!--DROPDOWN 2-->
+                <li class="nav-item dropdown">
+                  <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                    Food
+                  </a>
+                  <ul class="dropdown-menu">
+                    <li><a class="dropdown-item" href="">Entrées</a></li>
+                    <li><a class="dropdown-item" href="">Plats</a></li>
+                    <li><hr class="dropdown-divider"></li>
+                    <li><a class="dropdown-item" href="">Desserts</a></li>
+                  </ul>
+                </li>
+
+                <!--DROPDOWN 3-->
+                <li class="nav-item dropdown">
+                  <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                    Kid
+                  </a>
+                  <ul class="dropdown-menu">
+                    <li><a class="dropdown-item" href="">Activités</a></li>
+                    <li><a class="dropdown-item" href="">Sorties</a></li>
+                    <li><hr class="dropdown-divider"></li>
+                    <li><a class="dropdown-item" href="">Communication</a></li>
+                  </ul>
+                </li>
+
+                <!--DROPDOWN 4-->
+                <li class="nav-item dropdown">
+                  <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                    Mum
+                  </a>
+                  <ul class="dropdown-menu">
+                    <li><a class="dropdown-item" href="">Move</a></li>
+                    <li><a class="dropdown-item" href="">Do it yourself</a></li>
+                    <li><hr class="dropdown-divider"></li>
+                    <li><a class="dropdown-item" href= ""></a>Enjoy</li>
+                  </ul>
+                </li>
+               
+              </ul>
+
+              <div class="header-social-links d-flex">
+
+                {% if app.user %}
+                  <a class="col-md-12 dropbtn" href="{{path('app_logout')}}">
+                    {% if app.user.avatar is empty %}
+                      <i class="fa-solid fa-circle-user"></i>
+
+                    {% elseif app.user.opption is same as ('yes') %}
+                      <img class="roundedImage" src="{{asset('divers/avatars/' ~ app.user.avatar)}}" style="width:25px; height:25px; border-radius:50%">&ensp;
+                      <span class="zxfirstname">{{app.user.firstname|capitalize}}</span> <span class="zxlastname">{{app.user.lastname|upper}}</span>
+                      <a class="loggouts" href="{{ path('app_logout') }}"><i class="fa solid fa-power-off"></i></a>
+                      <a class="zxadmin" href="{{path('admin')}}"><i class="fa fa-circle-play"></i></a>
+
+                    {% else %}
+                      <img class="roundedImage" src="{{asset('divers/avatars/' ~ app.user.avatar)}}" style="width:25px; height:25px; border-radius:50%">&ensp;
+                      <span class="zxfirstname">{{app.user.firstname|capitalize}}</span> <span class="zxlastname">{{app.user.lastname|upper}}</span>
+                      <a class="loggouts" href="{{ path('app_logout') }}"><i class="fa-solid fa-power-off"></i></a>
+                {% endif %}
+
+                  </a>
+
+                {% else %}
+                    <a class="" href="{{path('app_login')}}">
+                      <i class="fa-regular fa-circle-user"></i>
                     </a>
-                    <a class="admin" href="{{path('admin')}}">
-                      <i class=""fa-solid fa-circle-play></i>
-                    </a>
-                  {% else %}
-                    <img class="imgRounded rounded" src="{{asser('divers/avatars/' ~ app.user.avatar)}}" style="width:25px; height:25px;">&ensp;
-                    <span class="firtstname">{{app.user.firstname|capitalize }}</span><span class="lastname">{{app.user.lastname|capitalize }}</span>
-                    <a class="" href="{{path('app_logout')}}">
-                      <i class="fa fa-power-off loggouts"></i>
-                    </a>
-            {% endif %}  
-              </a>
-            {% else %}
-                <a class="" href="{{path('app_login')}}">
-                  <i class="far fa-user-circle"></i>
-                </a>
-            {% endif %}
-        </div> #}
+
+                {% endif %}
+
+              </div>
 
 
-      <div class="header-social-link d-flex">
-
-        {% if not app.user %}
-            <a class="" href="{{path('app_login')}}" style="color:white;">
-              <i class="far fa-user-circle"></i>
-            </a>
-        {% else %}
-            <h6 class="" style="width:180px; font-size:0.8em; color:white; cursor:pointer; margin-left:12px;">
-                <img class="roundedImage" src="{{asset('divers/avatars/' ~ app.user.avatar)}}" alt="">
-                <a href="">{{app.user.firstname}}&ensp;{{app.user.lastname}}</a>
-            </h6>
-        {% endif %}
-        <div class="header-social-links d-flex">
-           <div class="col-md-2">
-              {% if not app.user %}
-
-              {% else %}
-
-                <a class="loggouts" href="{{ path('app_logout') }}">
-                <i class="fa fa-power-off loggouts"></i>
-                </a>
-              {% endif %}
-           </div>
-        </div>
+            </div>
+          </div>
+        </nav>
       </div>
+
+      <div class="col-md-3"></div>
 
     </div>
   </div>
-</nav>
-</body>
-</html>
+</div>

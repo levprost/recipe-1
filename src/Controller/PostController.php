@@ -42,7 +42,8 @@ class PostController extends AbstractController
         $posts = $reppo->find($id);
         return $this->render('show/show.html.twig', [
             'post' => $post,
-            'step1s' => $post->getStep1s()
+            'step1s' => $post->getStep1s(),
+            'postHasIngredient' => $post->getPostHasIngredient()
         ]);
     }
     #[Route('/favoris/ajout/{id}', name: 'ajout_favoris')]

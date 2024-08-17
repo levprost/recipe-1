@@ -34,6 +34,12 @@
                             <h2>{{post.abstract|raw}}
                             </h2>
                         </div>
+                        <h2>Les ingrédients : </h2>
+                            <ul>
+                                {% for postHasIngredient in postHasIngredient %}
+                                    <li><h5>{{ postHasIngredient.quantity }}&ensp;{{ postHasIngredient.unit.unity }}&ensp;{{ postHasIngredient.ingredient.name}}</h5></li>
+                                {% endfor %}
+                            </ul>
                         <h2>Étapes de la recette :</h2>
                             <ol>
                                 {% for step in step1s %}

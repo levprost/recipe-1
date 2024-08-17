@@ -61,11 +61,18 @@ class Post
     #[ORM\OneToMany(targetEntity: Step1::class, mappedBy: 'post')]
     private Collection $step1s;
 
+    /**
+     * @var Collection<int, PostHasIngredient>
+     */
+    #[ORM\OneToMany(targetEntity: PostHasIngredient::class, mappedBy: 'post', orphanRemoval: true)]
+    private Collection $postHasIngredient;
+
     public function __construct()
     {
         $this->step = new ArrayCollection();
         $this->favoris = new ArrayCollection();
         $this->step1s = new ArrayCollection();
+        $this->postHasIngredient = new ArrayCollection();
     }
 
     public function getId(): ?int
@@ -259,6 +266,36 @@ class Post
             // set the owning side to null (unless already changed)
             if ($step1->getPost() === $this) {
                 $step1->setPost(null);
+            }
+        }
+
+        return $this;
+    }
+
+    /**
+     * @return Collection<int, PostHasIngredient>
+     */
+    public function getPostHasIngredient(): Collection
+    {
+        return $this->postHasIngredient;
+    }
+
+    public function addPostHasIngredient(PostHasIngredient $postHasIngredient): static
+    {
+        if (!$this->postHasIngredient->contains($postHasIngredient)) {
+            $this->postHasIngredient->add($postHasIngredient);
+            $postHasIngredient->setPost($this);
+        }
+
+        return $this;
+    }
+
+    public function removePostHasIngredient(PostHasIngredient $postHasIngredient): static
+    {
+        if ($this->postHasIngredient->removeElement($postHasIngredient)) {
+            // set the owning side to null (unless already changed)
+            if ($postHasIngredient->getPost() === $this) {
+                $postHasIngredient->setPost(null);
             }
         }
 

@@ -45,16 +45,10 @@ class PostCrudController extends AbstractCrudController
 
             AssociationField::new('user')->setColumns('col-md-6'),
 
-            AssociationField::new('step1')->setColumns('col-md-6'),
 
             AssociationField::new('postHasIngredient')->setColumns('col-md-6'),
 
-            AssociationField::new('ingredient')->setColumns('col-md-6'),
-
-            AssociationField::new('unit')->setColumns('col-md-6'),
-
-
-
+    
             DateField::new('createdAt')->onlyOnIndex(),
 
             $isPublished = BooleanField::new('isPublished')->setPermission('ROLE_ADMIN')->setcolumns('col-md-1')->setLabel('Publié'),

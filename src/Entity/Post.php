@@ -67,6 +67,10 @@ class Post
     #[ORM\OneToMany(targetEntity: PostHasIngredient::class, mappedBy: 'post', orphanRemoval: true)]
     private Collection $postHasIngredient;
 
+    #[ORM\ManyToOne(inversedBy: 'posts')]
+    #[ORM\JoinColumn(nullable: false)]
+    private ?Rubrik $rubrik = null;
+
     public function __construct()
     {
         $this->step = new ArrayCollection();
@@ -298,6 +302,18 @@ class Post
                 $postHasIngredient->setPost(null);
             }
         }
+
+        return $this;
+    }
+
+    public function getRubrik(): ?Rubrik
+    {
+        return $this->rubrik;
+    }
+
+    public function setRubrik(?Rubrik $rubrik): static
+    {
+        $this->rubrik = $rubrik;
 
         return $this;
     }

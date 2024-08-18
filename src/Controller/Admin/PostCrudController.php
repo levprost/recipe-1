@@ -3,8 +3,11 @@
 namespace App\Controller\Admin;
 
 use App\Entity\Post;
+use App\Entity\Step1;
 use App\Entity\PostHasIngredient;
+use App\Form\Step1Type;
 use App\Form\PostHasIngredientType;
+use App\Form\IngredientType;
 use Symfony\Component\Form\Extension\Core\Type\DateTimeType;
 use Symfony\Component\Form\Extension\Core\Type\CheckboxType;
 use EasyCorp\Bundle\EasyAdminBundle\Field\CollectionField;
@@ -58,14 +61,25 @@ class PostCrudController extends AbstractCrudController
             
             AssociationField::new('user')->setColumns('col-md-6'),
             
-            AssociationField::new('step1s')->setColumns('col-md-6'),
-            
+            // Ajouter la collection des étapes
+
+            CollectionField::new('step1s')
+                ->setEntryType(Step1Type::class)
+                ->allowAdd(true)  // Allow adding new steps
+                ->allowDelete(true)  // Allow deleting steps
+                ->setColumns('col-md-12')
+                ->onlyOnForms(),
             DateField::new('createdAt')
             ->setLabel('Created At'),
-            
-            FormField::addPanel('Ingredients')->setFormType(PostHasIngredientType::class),
-            
-            
+
+             // Ingredients section
+             FormField::addPanel('Ingredient'),
+             CollectionField::new('PostHasIngredient')
+                 ->setEntryType(PostHasIngredientType::class)
+                 ->allowAdd(true)
+                 ->allowDelete(true)
+                 ->setColumns('col-md-12')
+                 ->onlyOnForms(),
             //on n'est pas obligé de mettre le set Permission. Pourquoi?
 
             $Published = BooleanField::new('isPublished')->setPermission('ROLE_ADMIN')->setcolumns('col-md-1')->setLabel('Publié'),

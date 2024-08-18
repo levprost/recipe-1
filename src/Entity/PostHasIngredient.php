@@ -3,6 +3,7 @@
 namespace App\Entity;
 
 use App\Repository\PostHasIngredientRepository;
+use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\ORM\Mapping as ORM;
 
 #[ORM\Entity(repositoryClass: PostHasIngredientRepository::class)]
@@ -46,7 +47,8 @@ class PostHasIngredient
 
     public function __toString()
     {
-        return $this->quantity; 
+        return $this->quantity;
+        return $this->ingredient;  
     }
 
     public function getIngredient(): ?Ingredient

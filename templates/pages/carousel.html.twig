@@ -1,14 +1,15 @@
 <div id="postCarousel" class="carousel slide" data-bs-ride="carousel">
     <div class="carousel-inner">
-        {% for post in posts %}
+        {% for post in posts2 %}
         <div class="carousel-item {% if loop.first %}active{% endif %}">
-            <img src="{{ asset('divers/image/' ~ post.image) }}" class="img-fluid" style="width:100%; height:800px;"
+            <img src="{{ asset('divers/images/' ~ post.image) }}" class="img-fluid" style="width:100%; height:800px;"
                 alt="{{ post.title }}">
 
             <div class="carousel-caption d-none d-md-block">
                 <h1 style="margin-top:-250px;">{{ post.title }}</h1>
                 <h4 style="margin-top:50px;">{{ post.abstract }}</h4>
-                <a href="" class="btn btn-danger btn-lg mt-5">Lire +</a>
+                 
+                <a href="" class="btn btn-success btn-lg mt-5">Lire +</a>
             </div>
 
         </div>

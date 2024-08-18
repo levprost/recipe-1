@@ -3,63 +3,76 @@
 {% block title %}Hello PostController!{% endblock %}
 
 {% block body %}
-    {% for posts in posts %}
-                    <div class="col-md-7">
+                <div class="container-fluid mt-5">
                     <div class="row">
-                        
-                        <div class="col-md-12 my-3">
-
-                        </div>
-                        <a class="col-md-12 my-3 title" href="{{path('show', {id: posts.id})}}">
-                            <h2>{{posts.title}}</h2>
-                        </a>
-                        <div class="col-md-12 mb-3">
-                           <h3> {{posts.abstract}}</h3>
-                        </div>
-                        <div class="col-md-12 mb-3">
-                           <h3> {{posts.prepaTime}} Min</h3>
-                        </div>
-                        <div class="col-md-12 mb-3">
-                            {{posts.createdAt|date('D d M Y ')}}
-                        </div>
+                        <h1 class="text-center">
+                            Bienvenue sur <strong>RECIPE</strong>, votre destination ultime pour explorer des recettes inspirantes et créatives.
+                        </h1>
+                        <hr class="">
+                        <h3 class="text-center mt-4" >
+                            Que vous soyez novice en cuisine ou amateur passionné, nous avons des idées délicieuses et faciles à suivre pour chaque occasion. Plongez dans notre collection de recettes, trouvez des astuces culinaires et transformez chaque repas en un moment exceptionnel. Bon appétit et bonne aventure gastronomique !
+                        </h3>
                     </div>
+                </div>
+                <div class="container-fluid mt-5">
+                <div class="row">
+                    <div class="row my-3">
+                        <h1 class="text-center">Nos dernières recettes</h1>
+                    </div>
+                    <div class="col-md-1"></div>
+                    <div class="col-md-10">
+                        {{include('pages/carousel.html.twig')}}
                     
                     </div>
-                    <a class="col-md-5" href="{{path('show', {id: posts.id})}}">
-                        <img class="my-3  d-flex" src="{{asset('divers/images/' ~ posts.image)}}" alt="Mon image"/>
-                    </a>
-                    {% endfor %}
+                    <div class="col-md-1"></div>
+                    
                 </div>
+                </div> 
+                <div class="row">
+                    
+                            <div class="col-md-1">
+                                
+                            </div>
+                            <div class="col-md-10">
+                                 <h1>Les plus vieilles</h1>
+                                 <div class="row text-center" style="justify-content:space-around;">
+                                    {% for posts2 in posts2 %}
+                                    <div class="card border-success border-3 d-grid my-3" style="width: 18rem;">
+                                        <img src="{{asset('divers/images/' ~ posts2.image)}}" alt="Mon image" class="card-img-top" alt="Product Image">
+                                        <div class="card-body d-grid">
+                                        <h5 class="card-title">{{posts2.title}}</h5>
+                                        <div class="txt-red">
+                                            {% if is_granted("ROLE_USER") %}
+                                                {% set isFavorite = false %}
+                                                {% for favoris in posts2.favoris %}
+                                                    {% if favoris.id == app.user.id %}
+                                                        {% set isFavorite = true %}
+                                                    {% endif %}    
+                                                {% endfor %}
+                                                {% if isFavorite %}
+                                                    <a href="{{ path('retrait_favoris', {id: posts2.id}) }}"style="color:red;"><i class="fas fa-heart"></i></a>
+                                                {% else %}
+                                                    <a href="{{ path('ajout_favoris', {id: posts2.id}) }}"style="color:red;"><i class="far fa-heart"></i></a>
+                                                {% endif %}
 
-                {% for posts2 in posts2 %}
-                <div class="card " style="width: 18rem;">
-                    <a class="col-md-5 my-3" href="{{path('show', {id: posts2.id})}}">
-                        <img src="d-flex imgPost2" src="{{asset('divers/images/' ~ posts2.image)}}" alt="Mon image"/>
-                    </a>
-                    <div class="card-body">
-                        <h5 class="card-title">{{posts2.title}}</h5>
-                        <p class="card-text">{{posts2.abstract}}</p>
-                        <a href="{{path('show', {id: posts2.id})}}" class="btn btn-primary">Go somewhere</a>
-                    </div>
-                <div class="txt-red">
-						{% if is_granted("ROLE_USER") %}
-                            {% set isFavorite = false %}
-							{% for favoris in posts2.favoris %}
-								{% if favoris.id == app.user.id %}
-                                    {% set isFavorite = true %}
-								{% endif %}    
-							{% endfor %}
-                            {% if isFavorite %}
-								<a href="{{ path('retrait_favoris', {id: posts2.id}) }}"><i class="fas fa-heart"></i></a>
-                            {% else %}
-								<a href="{{ path('ajout_favoris', {id: posts2.id}) }}"><i class="far fa-heart"></i></a>
-                            {% endif %}
+                                            {% else %}
+                                                <i class="far fa-heart"></i>
+                                            {% endif %}
+            
+                                        </div>
+                                        <p class="card-text"><a class="" href="{{path('show', {id: posts2.id})}}">{{posts2.abstract|slice(0, 100)}}...</a></p>
+                                        <div class="align-self-end">
+                                            <a href="{{path('show', {id: posts2.id})}}" class="btn btn-success">Voir la recette</a>
+                                        </div>
+                                        </div>
+                                    </div>
+                                    {% endfor %}
 
-						{% else %}
-							<i class="far fa-heart"></i>
-						{% endif %}
-						
-					</div>
+                                </div>
+                                </div>
+                            </div>
+                            <div class="col-md-1">
+                                
+                            </div>
                 </div>
-                {% endfor %}
 {% endblock %}

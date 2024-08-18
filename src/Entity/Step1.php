@@ -46,7 +46,7 @@ class Step1
         return $this->post;
     }
 
-    public function setPost(?Post $post): static
+    public function setPost(?Post $post): self
     {
         $this->post = $post;
 

@@ -4,11 +4,13 @@
 
 {% block body %}
 
-    <div class="container-fluid">
-        
+
         <div class="container">
             <div class="row">
-                <div class="col-md-8">
+                <div class="col-md-2">
+                    
+                </div>
+                <div class="col-md-8 d-flex" style="justify-content:end;">
                     <div class="row">
                         <div class="col-md-12 my-3">
                             {{post.createdAt|date('D d M Y')}}    
@@ -27,33 +29,34 @@
                             
                             {% endif %}
 
-                            <div class="card mb-4">
+                            <div class="mb-4">
                         </div>
-                            <div class="card-body">
-                        <div class="col-md-12 my-3">
-                            <h2>{{post.abstract|raw}}
-                            </h2>
+                            <div class="">
+                        <div class="col-md-12 my-3 p-0" style="text-align:justify;">
+                            <h4>{{post.abstract|raw}}
+                            </h4>
                         </div>
-                        <h2>Les ingrédients : </h2>
+                        <hr class="bg-success">
+                        </div>
+                        <h3>Les ingrédients </h3>
                             <ul>
                                 {% for postHasIngredient in postHasIngredient %}
                                     <li><h5>{{ postHasIngredient.quantity }}&ensp;{{ postHasIngredient.unit.unity }}&ensp;{{ postHasIngredient.ingredient.name}}</h5></li>
                                 {% endfor %}
                             </ul>
-                        <h2>Étapes de la recette :</h2>
+                            <hr class="bg-success">
+                                <h3>Étapes de la recette :</h3>
                             <ol>
                                 {% for step in step1s %}
                                     <li><h5>{{ step.content }}</h5></li>
                                 {% endfor %}
                             </ol>
                     </div>
+                </div>
+                <div class="col-md-2">
                     
-
-
-
-
+                </div>
             </div>
         </div>
-
-    </div>
+        </div>
 {% endblock %}

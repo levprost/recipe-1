@@ -3,6 +3,7 @@
 namespace App\Controller;
 
 use App\Entity\Post;
+use App\Entity\Rubrik;
 use App\Entity\User;
 use App\Repository\PostRepository;
 use Doctrine\ORM\EntityManagerInterface;
@@ -25,7 +26,7 @@ class PostController extends AbstractController
     public function index(): Response
     {
         $posts = $this->repo->findBy([],[],1);
-        $posts2 = $this->repo->findBy([],[],4,1);
+        $posts2 = $this->repo->findBy([],[]);
 
         return $this->render('post/index.html.twig',[
             'posts' => $posts, 'posts2' => $posts2,
@@ -71,5 +72,17 @@ class PostController extends AbstractController
         $emi->flush();
         return $this->redirectToRoute('app_post');
     }
+
+      //GESTION DES RUBRIKS
+      #[Route('/rubrik/rubrik/{id}', name: 'posts_by_rubrik')]
+      public function postsByRubrik(Rubrik $rubrik, PostRepository $postRepository): Response
+      {
+          $posts = $postRepository->findByRubrik($rubrik);
+  
+          return $this->render('rubrik/rubrik.html.twig', [
+              'rubrik' => $rubrik,
+              'posts' => $posts,
+          ]);
+      }
  
 }

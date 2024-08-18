@@ -34,7 +34,7 @@ class Ingredient
     /**
      * @var Collection<int, PostHasIngredient>
      */
-    #[ORM\OneToMany(targetEntity: PostHasIngredient::class, mappedBy: 'ingredient', orphanRemoval: true)]
+    #[ORM\OneToMany(targetEntity: PostHasIngredient::class, mappedBy: 'ingredient', cascade: ['persist', 'remove'], orphanRemoval: true)]
     private Collection $PostHasIngredient;
 
     public function __construct()
@@ -43,7 +43,7 @@ class Ingredient
     }
     public function __toString()
     {
-        return $this->name; 
+        return $this->name;
     }
 
     public function getId(): ?int

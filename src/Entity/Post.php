@@ -60,13 +60,14 @@ class Post
     /**
      * @var Collection<int, Step1>
      */
-    #[ORM\OneToMany(targetEntity: Step1::class, mappedBy: 'post')]
+    #[ORM\OneToMany(targetEntity: Step1::class, mappedBy: 'post', cascade: ['persist', 'remove'], orphanRemoval: true)]
     private Collection $step1s;
 
     /**
      * @var Collection<int, PostHasIngredient>
      */
-    #[ORM\OneToMany(targetEntity: PostHasIngredient::class, mappedBy: 'post', orphanRemoval: true)]
+
+    #[ORM\OneToMany(targetEntity: PostHasIngredient::class, mappedBy: 'post', cascade: ['persist', 'remove'],orphanRemoval: true)]
     private Collection $postHasIngredient;
 
     #[ORM\ManyToOne(inversedBy: 'posts')]
@@ -275,7 +276,7 @@ class Post
         return $this->step1s;
     }
 
-    public function addStep1(Step1 $step1): static
+    public function addStep1(Step1 $step1): self
     {
         if (!$this->step1s->contains($step1)) {
             $this->step1s->add($step1);
@@ -285,7 +286,7 @@ class Post
         return $this;
     }
 
-    public function removeStep1(Step1 $step1): static
+    public function removeStep1(Step1 $step1): self
     {
         if ($this->step1s->removeElement($step1)) {
             // set the owning side to null (unless already changed)
@@ -296,10 +297,7 @@ class Post
 
         return $this;
     }
-    public function __toString()
-    {
-        return $this->step1s; 
-    }
+
 
     /**
      * @return Collection<int, PostHasIngredient>

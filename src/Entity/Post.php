@@ -37,7 +37,7 @@ class Post
 
     #[ORM\Column]
     private ?\DateTimeImmutable $createdAt = null;
-
+     
     #[ORM\Column(length: 100, nullable: true)]
     private ?string $image = null;
 
@@ -179,7 +179,15 @@ class Post
 
         return $this;
     }
+    /**
+      *@ORM\PrePersist
+     */
+    public function setCreatedAtValue(): void
+    {
+        $this->createdAt = new \DateTimeImmutable();
+    }
 
+   
     public function getImage(): ?string
     {
         return $this->image;
@@ -286,6 +294,10 @@ class Post
         }
 
         return $this;
+    }
+    public function __toString()
+    {
+        return $this->step1s; 
     }
 
     /**

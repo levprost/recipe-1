@@ -20,6 +20,10 @@ class Step1
     #[ORM\ManyToOne(inversedBy: 'step1s')]
     private ?Post $post = null;
 
+    public function __toString()
+    {
+        return $this->content; 
+    }
     public function getId(): ?int
     {
         return $this->id;

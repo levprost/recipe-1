@@ -3,13 +3,17 @@
 namespace App\Controller\Admin;
 
 use App\Entity\Post;
+use App\Entity\PostHasIngredient;
+use App\Form\PostHasIngredientType;
 use EasyCorp\Bundle\EasyAdminBundle\Field\BooleanField;
+use EasyCorp\Bundle\EasyAdminBundle\Field\CollectionField;
 use EasyCorp\Bundle\EasyAdminBundle\Config\Crud;
 use EasyCorp\Bundle\EasyAdminBundle\Config\Action;
 use EasyCorp\Bundle\EasyAdminBundle\Config\Actions;
 use EasyCorp\Bundle\EasyAdminBundle\Config\Filters;
 use EasyCorp\Bundle\EasyAdminBundle\Field\TextField;
 use EasyCorp\Bundle\EasyAdminBundle\Field\DateField;
+use EasyCorp\Bundle\EasyAdminBundle\Field\FormField;
 use EasyCorp\Bundle\EasyAdminBundle\Field\ImageField;
 use EasyCorp\Bundle\EasyAdminBundle\Field\IntegerField;
 use EasyCorp\Bundle\EasyAdminBundle\Field\AssociationField;
@@ -44,13 +48,15 @@ class PostCrudController extends AbstractCrudController
             AssociationField::new('rubrik')->setColumns('col-md-4'),
 
             AssociationField::new('user')->setColumns('col-md-6'),
-
-            AssociationField::new('postHasIngredient')->setColumns('col-md-6'),
-
     
             DateField::new('createdAt')->onlyOnIndex(),
+            
 
-            $isPublished = BooleanField::new('isPublished')->setPermission('ROLE_ADMIN')->setcolumns('col-md-1')->setLabel('Publié'),
+            CollectionField::new('postHasIngredient')
+            ->setEntryType(PostHasIngredientType::class)
+            ->onlyOnForms(),
+            FormField::addPanel('Ingredients')->setFormType(PostHasIngredientType::class),
+
             //on n'est pas obligé de mettre le set Permission. Pourquoi?
             
         ];

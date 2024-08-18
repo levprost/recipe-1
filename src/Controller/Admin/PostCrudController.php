@@ -6,7 +6,7 @@ use App\Entity\Post;
 use App\Entity\PostHasIngredient;
 use App\Form\PostHasIngredientType;
 use Symfony\Component\Form\Extension\Core\Type\DateTimeType;
-use EasyCorp\Bundle\EasyAdminBundle\Field\BooleanField;
+use Symfony\Component\Form\Extension\Core\Type\CheckboxType;
 use EasyCorp\Bundle\EasyAdminBundle\Field\CollectionField;
 use EasyCorp\Bundle\EasyAdminBundle\Config\Crud;
 use EasyCorp\Bundle\EasyAdminBundle\Config\Action;
@@ -17,6 +17,7 @@ use EasyCorp\Bundle\EasyAdminBundle\Field\DateField;
 use EasyCorp\Bundle\EasyAdminBundle\Field\FormField;
 use EasyCorp\Bundle\EasyAdminBundle\Field\ImageField;
 use EasyCorp\Bundle\EasyAdminBundle\Field\IntegerField;
+use EasyCorp\Bundle\EasyAdminBundle\Field\BooleanField;
 use EasyCorp\Bundle\EasyAdminBundle\Field\DateTimeField;
 use EasyCorp\Bundle\EasyAdminBundle\Field\AssociationField;
 use EasyCorp\Bundle\EasyAdminBundle\Controller\AbstractCrudController;
@@ -39,7 +40,7 @@ class PostCrudController extends AbstractCrudController
 
             TextField::new('abstract')->setColumns('col-md-6'),
 
-            TextField::new('prepaTime')->setColumns('col-md-6'),
+            IntegerField::new('prepTime')->setColumns('col-md-6'),
 
             $image = ImageField::new('image')
                 ->setUploadDir('public/divers/images')
@@ -47,25 +48,27 @@ class PostCrudController extends AbstractCrudController
                 ->setSortable(false)
                 ->setFormTypeOption('required', false)->setColumns('col-md-2'),
             
-            DateTimeField::new('prepTime')
+            /*DateTimeField::new('prepTime')
                 ->setLabel('Preparation Time')
                 ->setFormat('yyyy-MM-dd HH:mm')
                 ->setRequired(false)
                 ->setColumns('col-md-2'),
-
+            */
             AssociationField::new('rubrik')->setColumns('col-md-4'),
-
+            
             AssociationField::new('user')->setColumns('col-md-6'),
-
+            
             AssociationField::new('step1s')->setColumns('col-md-6'),
-    
+            
             DateField::new('createdAt')
-                ->setLabel('Created At'),
+            ->setLabel('Created At'),
             
             FormField::addPanel('Ingredients')->setFormType(PostHasIngredientType::class),
-
-            //on n'est pas obligé de mettre le set Permission. Pourquoi?
             
+            
+            //on n'est pas obligé de mettre le set Permission. Pourquoi?
+
+            $Published = BooleanField::new('isPublished')->setPermission('ROLE_ADMIN')->setcolumns('col-md-1')->setLabel('Publié'),
         ];
     }
 

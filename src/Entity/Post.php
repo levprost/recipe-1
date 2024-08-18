@@ -5,6 +5,7 @@ namespace App\Entity;
 use App\Repository\PostRepository;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
+use Doctrine\DBAL\Types\IntegerType;
 use Doctrine\DBAL\Types\Types;
 use Doctrine\ORM\Mapping as ORM;
 use Gedmo\Mapping\Annotation as Gedmo;
@@ -20,8 +21,8 @@ class Post
     #[ORM\Column(length: 255)]
     private ?string $title = null;
 
-    #[ORM\Column(type: Types::TIME_MUTABLE)]
-    private ?\DateTimeInterface $prepTime = null;
+    #[ORM\Column()]
+    private ?int $prepTime = null;
 
     #[ORM\Column(type: Types::TIME_MUTABLE, nullable: true)]
     private ?\DateTimeInterface $cookingTime = null;
@@ -108,12 +109,12 @@ class Post
         return $this;
     }
 
-    public function getPrepTime(): ?\DateTimeInterface
+    public function getPrepTime(): ?int
     {
         return $this->prepTime;
     }
 
-    public function setPrepTime(\DateTimeInterface $prepTime): static
+    public function setPrepTime(?int $prepTime): static
     {
         $this->prepTime = $prepTime;
 
@@ -354,12 +355,12 @@ class Post
         return $this;
     }*/
 
-    public function isPublished(): ?bool
+    public function getIsPublished(): ?bool
     {
         return $this->isPublished;
     }
 
-    public function setPublished(bool $isPublished): static
+    public function setIsPublished(bool $isPublished): static
     {
         $this->isPublished = $isPublished;
 
